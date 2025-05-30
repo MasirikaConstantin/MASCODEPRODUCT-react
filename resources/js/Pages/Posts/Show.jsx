@@ -8,29 +8,28 @@ import Layout from '@/Layouts/Base';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
-export default function PostShow({ post,categories }) {
+export default function PostShow({ post, categories }) {
     const [showAllComments, setShowAllComments] = useState(false);
     const { auth } = usePage().props;
     const displayedComments = showAllComments 
         ? post.comments 
         : post.comments.slice(0, 3);
-const getCodeClass = (category) => {
-    // Si category est un objet avec propriété 'titre'
-    const categoryName = typeof category === 'object' 
-        ? category.titre 
-        : category; // au cas où c'est déjà une string
     
-    // Convertir en minuscules et nettoyer le nom
-    const normalized = String(categoryName)
-        .toLowerCase()
-        .trim()
-        .replace(/\s+/g, '-'); // Remplace les espaces par des tirets
-    
-    return `language-${normalized}`;
-};
+    const getCodeClass = (category) => {
+        const categoryName = typeof category === 'object' 
+            ? category.titre 
+            : category;
+        
+        const normalized = String(categoryName)
+            .toLowerCase()
+            .trim()
+            .replace(/\s+/g, '-');
+        
+        return `language-${normalized}`;
+    };
 
-//const codeClass = getCodeClass(post.categorie_id);
-const codeClass = getCodeClass({ id: post.categorie.id, titre: post.categorie.titre });
+    const codeClass = getCodeClass({ id: post.categorie.id, titre: post.categorie.titre });
+
     return (
         <Layout>
             <Head>
@@ -46,15 +45,14 @@ const codeClass = getCodeClass({ id: post.categorie.id, titre: post.categorie.ti
                 <meta name="twitter:image" content={post.image || `https://autres.mascodeproduct.com/mas-product.ico`} />
             </Head>
 
-            <div className="container mx-auto px-4 py-8 ">
-                <div className="flex flex-col lg:flex-row gap-8 ">
+            <div className="container mx-auto px-4 py-8">
+                <div className="flex flex-col lg:flex-row gap-8">
                     {/* Contenu principal */}
-                    <div className="lg:w-2/3 ">
-                        <article className="card  shadow-md p-6 mb-8 bg-base-200">
+                    <div className="lg:w-2/3">
+                        <article className="card shadow-md p-6 mb-8 bg-base-200">
                             <header className="mb-6">
-                                <div className="flex items-center justify-between mb-4">
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
                                     <Link 
-                                        
                                         href={route('users.show', {user: `${post.author.name.toLowerCase().replace(/\s+/g, '-')}-${post.author.id}`})}
                                         className="flex items-center gap-3 group"
                                     >
@@ -79,20 +77,19 @@ const codeClass = getCodeClass({ id: post.categorie.id, titre: post.categorie.ti
                                         </div>
                                     </Link>
                                     
-                                    <div className="flex gap-2">
+                                    <div className="flex flex-wrap gap-2 justify-end">
                                         {post.tags?.map(tag => (
                                             <Link 
                                                 key={tag.id}
-                                                className="badge badge-outline hover:badge-primary transition"
+                                                className="badge badge-outline hover:badge-primary transition text-xs sm:text-sm"
                                             >
                                                 #{tag.name}
                                             </Link>
                                         ))}
-
                                     </div>
                                 </div>
                                 
-                                <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
+                                <h1 className="text-2xl sm:text-3xl font-bold mb-4">{post.title}</h1>
                             </header>
 
                             {post.image && (
@@ -109,39 +106,33 @@ const codeClass = getCodeClass({ id: post.categorie.id, titre: post.categorie.ti
                                 <div className="aspect-w-16 aspect-h-9 mb-6">
                                     <iframe 
                                         src={post.video_url} 
-                                        className="w-full h-[32rem] rounded-lg"
+                                        className="w-full h-[20rem] sm:h-[32rem] rounded-lg"
                                         allowFullScreen
                                     />
                                 </div>
                             )}
-{/*
-                            <div 
-                            
-                                className="prose max-w-none mb-8  shadow-lg shadow-base-100 px-4 py-4"
-                                dangerouslySetInnerHTML={{ __html: post.contenus }}
-                            />*/}
-                             <div 
-                                    className="prose max-w-none mb-8  shadow-lg shadow-base-100 px-4 py-4"
-                                >
-<QuillContentViewer content={post.contenus} />
-                                </div>
+
+                            <div className="prose max-w-none mb-8 shadow-lg shadow-base-100 px-4 py-4">
+                                <QuillContentViewer content={post.contenus} />
+                            </div>
+
                             {post.codesource && (
-                                
-                                      <PrismCode code={post.codesource} language={codeClass} />
+                                <PrismCode code={post.codesource} language={codeClass} />
                             )}
-                            <div className="flex items-center justify-between border-t border-b border-base-300 py-4 my-6">
-                                <div className="flex items-center gap-6 ">
-                                <LikeButton 
-                                            likeableId={post.id}
-                                            likeableType="App\Models\Post"
-                                            initialLikes={post.stats.likes_count}
-                                            initialIsLiked={post.has_liked}
-                                        />
-                                        <BookmarkButton 
-                                            bookmarkableId={post.id}
-                                            bookmarkableType="App\Models\Post"
-                                            initialIsBookmarked={post.is_bookmarked}
-                                        />
+
+                            <div className="flex flex-col sm:flex-row items-center justify-between border-t border-b border-base-300 py-4 my-6 gap-4">
+                                <div className="flex items-center gap-2 sm:gap-6 flex-wrap">
+                                    <LikeButton 
+                                        likeableId={post.id}
+                                        likeableType="App\Models\Post"
+                                        initialLikes={post.stats.likes_count}
+                                        initialIsLiked={post.has_liked}
+                                    />
+                                    <BookmarkButton 
+                                        bookmarkableId={post.id}
+                                        bookmarkableType="App\Models\Post"
+                                        initialIsBookmarked={post.is_bookmarked}
+                                    />
                                     
                                     <button className="btn btn-ghost btn-sm gap-2 bg-base-100">
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -150,46 +141,41 @@ const codeClass = getCodeClass({ id: post.categorie.id, titre: post.categorie.ti
                                         <span>{post.stats.comments_count}</span>
                                     </button>
 
-
                                     {post.tags && post.tags.length > 0 && (
-                                            <div className="mt-2 flex flex-wrap gap-2">
-                                                {post.tags?.map((tag) => {
-                                                    // Génère une couleur aléatoire basée sur le hash du nom du tag
-                                                    const colorClasses = [
-                                                        'badge-primary',
-                                                        'badge-secondary',
-                                                        'badge-accent',
-                                                        'badge-info',
-                                                        'badge-success',
-                                                        'badge-warning',
-                                                        'badge-error',
-                                                        'badge-ghost'
-                                                    ];
-                                                    const colorIndex = Math.abs(
-                                                        tag.name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
-                                                    ) % colorClasses.length;
-                                                    
-                                                    return (
-                                                        <Link 
-                                                            key={tag.id}
-                                                            className={`badge ${colorClasses[colorIndex]} hover:opacity-80 transition-opacity`}
-                                                        >
-                                                            {tag.name}
-                                                        </Link>
-                                                    );
-                                                })}
-                                            </div>
-                                        )}
-
-
+                                        <div className="flex flex-wrap gap-1 sm:gap-2">
+                                            {post.tags?.map((tag) => {
+                                                const colorClasses = [
+                                                    'badge-primary',
+                                                    'badge-secondary',
+                                                    'badge-accent',
+                                                    'badge-info',
+                                                    'badge-success',
+                                                    'badge-warning',
+                                                    'badge-error',
+                                                    'badge-ghost'
+                                                ];
+                                                const colorIndex = Math.abs(
+                                                    tag.name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+                                                ) % colorClasses.length;
+                                                
+                                                return (
+                                                    <Link 
+                                                        key={tag.id}
+                                                        className={`badge text-xs sm:text-sm ${colorClasses[colorIndex]} hover:opacity-80 transition-opacity`}
+                                                    >
+                                                        {tag.name}
+                                                    </Link>
+                                                );
+                                            })}
+                                        </div>
+                                    )}
                                 </div>
                                 
-                                <div className="text-sm">
-                                <div className={`text-sm badge me-9 badge-${post.categorie.couleur}`}>
-                                    {post.categorie.titre}
+                                <div className="flex items-center gap-2 text-sm">
+                                    <div className={`badge me-2 badge-${post.categorie.couleur} text-xs sm:text-sm`}>
+                                        {post.categorie.titre}
                                     </div>
                                     {post.stats.views_count} vues
-                                    
                                 </div>
                             </div>
                         </article>
@@ -198,17 +184,16 @@ const codeClass = getCodeClass({ id: post.categorie.id, titre: post.categorie.ti
                         <section className="card bg-base-200 shadow-md p-6 mb-8">
                             <h2 className="text-xl font-bold mb-6">Commentaires ({post.all_comments_count})</h2>
                             
-                            {auth.user && (
+                            {auth.user ? (
                                 <CommentForm postId={post.id} />
-                            )}
-                            {!auth.user && (
+                            ) : (
                                 <div className="relative mb-5 h-12">
                                     <textarea
-                                    type="text"
-                                    readOnly
-                                    defaultValue="Connectez - vous pour placer un commentaire"
-                                    className="textarea textarea-error w-full p-3 pr-16 border rounded-lg resize-none transition-all absolute top-0 left-0"
-                                    rows= "2"
+                                        type="text"
+                                        readOnly
+                                        defaultValue="Connectez-vous pour placer un commentaire"
+                                        className="textarea textarea-error w-full p-3 pr-16 border rounded-lg resize-none transition-all absolute top-0 left-0"
+                                        rows="2"
                                     />
                                 </div>
                             )}
@@ -220,7 +205,6 @@ const codeClass = getCodeClass({ id: post.categorie.id, titre: post.categorie.ti
                                         comment={comment}
                                         auth={auth}
                                     />
-
                                 ))}
                             </div>
                             
@@ -284,12 +268,12 @@ const codeClass = getCodeClass({ id: post.categorie.id, titre: post.categorie.ti
                                                     </div>
                                                 </div>
                                                 
-
-                                                <div className="flex gap-1 mt-1">
+                                                <div className="flex gap-1 mt-1 flex-wrap">
                                                     {related.tags?.map(tag => (
-                                                        <div className="badge badge-xs badge-info"
-                                                        key={tag.id}> 
-                                                            
+                                                        <div 
+                                                            className="badge badge-xs sm:badge-sm badge-info"
+                                                            key={tag.id}
+                                                        >
                                                             #{tag.name}
                                                         </div>
                                                     ))}
@@ -321,7 +305,6 @@ const codeClass = getCodeClass({ id: post.categorie.id, titre: post.categorie.ti
                                 )}
                                 <Link 
                                     href={route('users.show', {user: `${post.author.name.toLowerCase().replace(/\s+/g, '-')}-${post.author.id}`})}
-
                                     className="btn btn-outline btn-sm mt-4"
                                 >
                                     Voir le profil
