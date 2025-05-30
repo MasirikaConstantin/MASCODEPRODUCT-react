@@ -13,14 +13,15 @@ class NewsletterMail extends Mailable
 
     public $content;
     public $unsubscribeLink;
+    public $subscriber; // Ajout de la propriété manquante
 
     /**
      * Create a new message instance.
      */
-    // app/Mail/NewsletterMail.php
-    public function __construct($content, Subscriber $subscriber)
+    public function __construct(array $content, Subscriber $subscriber)
     {
         $this->content = $content;
+        $this->subscriber = $subscriber; // Initialisation de la propriété subscriber
         $this->unsubscribeLink = route('newsletter.unsubscribe', [
             'token' => $subscriber->token,
             'email' => urlencode($subscriber->email) // Encode l'email pour l'URL
@@ -32,10 +33,12 @@ class NewsletterMail extends Mailable
      */
     public function build()
     {
-        return $this->subject($this->content['subject'] ?? 'Votre newsletter')
+        return $this->to($this->subscriber->email) // Ajout du destinataire
+                   ->subject($this->content['subject'] ?? 'Votre newsletter')
                    ->markdown('emails.newsletter')
                    ->with([
                        'content' => $this->content,
+                       'subscriber' => $this->subscriber, // Utilisation de la propriété
                        'unsubscribeLink' => $this->unsubscribeLink
                    ]);
     }

@@ -63,21 +63,31 @@ protected function sendNewsletterToSubscribers()
 
 protected function getNewsletterContent()
 {
+    $currentDate = now()->translatedFormat('F Y');
+    
     return [
-        'subject' => 'Votre newsletter mensuelle - ' . now()->format('F Y'),
-        'title' => 'Les dernières actualités',
-        'body' => implode("\n\n", [
-            "**Bonjour cher abonné !**",
-            "Voici les dernières nouveautés :",
-            "",
-            "• Nouvel article : [10 astuces Laravel](".url('/articles/10-astuces').")",
-            "• Interview avec notre développeur principal",
-            "• Prochains événements à ne pas manquer",
-            "",
-            "Nous espérons que ces contenus vous plairont !"
-        ]),
-        'cta_text' => 'Voir toutes les actualités',
-        'cta_url' => url('/actualites')
+        'subject' => "📬 Votre résumé mensuel - {$currentDate}",
+        'title' => "✨ Ce mois-ci chez " . config('app.name'),
+        'sections' => [
+            [
+                'title' => '🚀 Les incontournables',
+                'items' => [
+                    ['text' => '10 astuces Laravel pro', 'url' => url('/astuces'), 'desc' => 'Boostez vos projets'],
+                    ['text' => 'Nos nouveaux posts techniques', 'url' => url('/posts'), 'desc' => 'Dernières trouvailles'],
+                ]
+            ],
+            
+            [
+                'title' => '📅 Agenda',
+                'items' => [
+                    'Webinaire : Optimisation Eloquent - ' . now()->addDays(5)->format('d/m'),
+                    'Meetup régional - ' . now()->addWeeks(2)->format('d/m/Y')
+                ]
+            ]
+        ],
+        'cta_text' => '📖 Lire le magazine complet',
+        'cta_url' => url('/'),
+        'footer_note' => '« Merci de faire partie de notre communauté ! »'
     ];
 }
 }
