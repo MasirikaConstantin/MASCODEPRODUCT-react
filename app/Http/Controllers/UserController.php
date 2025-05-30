@@ -17,7 +17,7 @@ class UserController extends Controller
         $user->loadCount(['comments', 'likes', 'posts']);
 
         $posts = $user->posts()
-            ->with('user:id,name,avatar') // Charge la relation user avec seulement id, name, username
+            ->with('user:id,name,image') // Charge la relation user avec seulement id, name, username
             ->latest()
             ->take(5)
             ->get(['id', 'titre', 'slug', 'created_at', 'user_id','image',"contenus"]) // Ajoutez user_id
@@ -40,10 +40,10 @@ class UserController extends Controller
         // Récupération des commentaires paginés avec leurs relations
         $comments = $user->comments()
             ->with([
-                'user:id,name,username,avatar',
+                'user:id,name,image',
                 'post:id,titre,slug',
                 'replies' => function ($query) {
-                    $query->with('user:id,name,username,avatar')
+                    $query->with('user:id,name,image')
                           ->latest()
                           ->limit(3);
                 },
@@ -67,8 +67,7 @@ class UserController extends Controller
                     'user' => [
                         'id' => $comment->user->id,
                         'name' => $comment->user->name,
-                        'username' => $comment->user->username,
-                        'avatar' => $comment->user->avatar,
+                        'avatar' => $comment->user->image,
                     ],
                     'replies' => $comment->replies->map(function ($reply) {
                         return [
@@ -78,8 +77,7 @@ class UserController extends Controller
                             'user' => [
                                 'id' => $reply->user->id,
                                 'name' => $reply->user->name,
-                                'username' => $reply->user->username,
-                                'avatar' => $reply->user->avatar,
+                                'avatar' => $reply->user->image,
                             ],
                         ];
                     }),
@@ -93,9 +91,8 @@ class UserController extends Controller
             'user' => [
                 'id' => $user->id,
                 'name' => $user->name,
-                'username' => $user->username,
                 'email' => $user->email,
-                'avatar' => $user->avatar,
+                'avatar' => $user->image,
                 'bio' => $user->bio,
                 'website' => $user->website,
                 'birthdate' => $user->birthdate?->format('Y-m-d'),
@@ -110,8 +107,7 @@ class UserController extends Controller
                 'user' => auth()->user() ? [
                     'id' => auth()->id(),
                     'name' => auth()->user()->name,
-                    'username' => auth()->user()->username,
-                    'avatar' => auth()->user()->avatar,
+                    'avatar' => auth()->user()->image,
                 ] : null
                 ],
                 'posts' => $posts,
