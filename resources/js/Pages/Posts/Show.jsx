@@ -37,6 +37,14 @@ const codeClass = getCodeClass({ id: post.categorie.id, titre: post.categorie.ti
             <Head>
                 <title>{post.title}</title>
                 <meta name="description" content={post.meta} />
+                <meta property="og:title" content={post.title} />
+                <meta property="og:description" content={post.meta} />
+                <meta property="og:image" content={post.image || `https://autres.mascodeproduct.com/mas-product.ico`} />
+                <meta property="og:url" content={route('posts.show', post.slug)} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={post.title} />
+                <meta name="twitter:description" content={post.meta} />
+                <meta name="twitter:image" content={post.image || `https://autres.mascodeproduct.com/mas-product.ico`} />
             </Head>
 
             <div className="container mx-auto px-4 py-8 ">

@@ -36,6 +36,14 @@ export default function Show({ astuce }) {
             <Head>
                 <title>{astuce.title}</title>
                 <meta name="description" content={astuce.meta_description || astuce.title} />
+                <meta property="og:title" content={astuce.title} />
+                <meta property="og:description" content={astuce.meta_description || astuce.title} />
+                <meta property="og:image" content={astuce.image || `https://autres.mascodeproduct.com/mas-product.ico`} />
+                <meta property="og:url" content={window.location.href} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={astuce.title} />
+                <meta name="twitter:description" content={astuce.meta_description || astuce.title} />
+                <meta name="twitter:image" content={astuce.image || `https://autres.mascodeproduct.com/mas-product.ico`} />
             </Head>
 
             <div className="container mx-auto px-4 py-8">
