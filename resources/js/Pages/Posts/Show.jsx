@@ -31,7 +31,6 @@ const getCodeClass = (category) => {
 
 //const codeClass = getCodeClass(post.categorie_id);
 const codeClass = getCodeClass({ id: post.categorie.id, titre: post.categorie.titre });
-
     return (
         <Layout>
             <Head>
