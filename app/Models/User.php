@@ -62,7 +62,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
     public function imageUrls(){
-        return $this->image ? asset('storage/' . $this->image) : null;
+        return $this->image ? Storage::disk('public')->url($this->image) : null;
+
+//        return $this->image ? asset('storage/' . $this->image) : null;
         //return Storage::disk('public')->url($this->image); 
     }
 
@@ -73,7 +75,9 @@ class User extends Authenticatable
 
     public function getImageUrlAttribute()
 {
-    return $this->image ? Storage::url($this->image) : null;
+    //return $this->image ? Storage::url($this->image) : null;
+    return $this->image ? Storage::disk('public')->url($this->image) : null;
+
 }
     public function posts()
     {
@@ -89,7 +93,9 @@ class User extends Authenticatable
         return $this->hasMany(Astuce::class);
     }
     public function imageUrl(){
-        return $this->image ? asset('storage/' . $this->image) : null;
+        return $this->image ? Storage::disk('public')->url($this->image) : null;
+
+//        return $this->image ? asset('storage/' . $this->image) : null;
         //return Storage::disk('public')->url($this->image); 
     }
 
@@ -99,7 +105,9 @@ class User extends Authenticatable
     }
 
     public function imageUrlAstuces(){
-        return $this->image ? asset('storage/' . $this->image) : null;
+        //return $this->image ? asset('storage/' . $this->image) : null;
+        return $this->image ? Storage::disk('public')->url($this->image) : null;
+
         //return Storage::disk('public')->url($this->image); 
     }
     public function com()

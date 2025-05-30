@@ -67,7 +67,7 @@ export default function ProfileView() {
                                 <div className="w-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                                     {user.image ? (
                                         <img 
-                    src={`${window.location.origin}/storage/${user.image}`}
+                    src={`${window.location.origin}/public/${user.image}`}
 
                                             alt="Photo de profil"
                                             onError={(e) => {

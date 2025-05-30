@@ -22,8 +22,8 @@ class Post extends Model
         'etat'
     ];
     public function imageUrl(){
-        return $this->image ? asset('storage/' . $this->image) : null;
-        //return Storage::disk('public')->url($this->image); 
+        //return $this->image ? asset('public/' . $this->image) : null;
+        return $this->image ? Storage::disk('public')->url($this->image) : null;
     }
     // Dans app/Models/Post.php
 public function getIsBookmarkedAttribute()
@@ -42,7 +42,8 @@ public function getIsBookmarkedAttribute()
 
 public function getImageUrlAttribute()
 {
-    return $this->image ? asset('storage/' . $this->image) : null;
+    return $this->image ? Storage::disk('public')->url($this->image) : null;
+
 }
 
     public function category(){
