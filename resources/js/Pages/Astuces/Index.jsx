@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Head, Link, router } from '@inertiajs/react';
 import Layout from '@/Layouts/AuthenticatedLayout';
 import debounce from 'lodash.debounce';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendar, faCircleUser, faTags } from '@fortawesome/free-solid-svg-icons';
 
 export default function Index({ astuces, categories, filters }) {
     const [search, setSearch] = useState({
@@ -206,7 +208,7 @@ export default function Index({ astuces, categories, filters }) {
                                             <img
                                                 src={`/storage/${astuce.image}`}
                                                 alt={astuce.titre}
-                                                className={`w-full h-full object-cover ${viewMode === 'list' ? 'h-48 lg:h-full' : 'h-48'}`}
+                                                className={`w-full h-full object-cover ${viewMode === 'list' ? 'h-36 lg:h-full' : 'h-36'}`}
                                             />
                                             {!astuce.etat && (
                                                 <div className="absolute top-4 right-4">
@@ -220,7 +222,7 @@ export default function Index({ astuces, categories, filters }) {
                                     )}
                                     
                                     <div className={`card-body ${viewMode === 'list' ? 'lg:w-2/3' : ''}`}>
-                                        <h2 className="card-title text-xl mb-3 hover:text-primary transition-colors duration-300">
+                                        <h2 className="card-title text-md mb-3 hover:text-primary transition-colors duration-300">
                                             {astuce.titre}
                                             {!astuce.etat && !astuce.image && (
                                                 <div className="badge badge-warning">
@@ -232,15 +234,15 @@ export default function Index({ astuces, categories, filters }) {
                                         
                                         <div className="flex flex-wrap gap-2 mb-3">
                                             <div className="badge badge-primary badge-outline">
-                                                <i className="fas fa-user mr-1"></i>
+                                                <FontAwesomeIcon icon={faCircleUser}  />
                                                 {astuce.user.name}
                                             </div>
                                             <div className="badge badge-secondary badge-outline">
-                                                <i className="fas fa-tag mr-1"></i>
+                                                <FontAwesomeIcon icon={faTags} />
                                                 {astuce.categorie.titre}
                                             </div>
                                             <div className="badge badge-accent badge-outline">
-                                                <i className="fas fa-calendar mr-1"></i>
+                                                <FontAwesomeIcon icon={faCalendar} />
                                                 {new Date(astuce.created_at).toLocaleDateString('fr-FR')}
                                             </div>
                                         </div>

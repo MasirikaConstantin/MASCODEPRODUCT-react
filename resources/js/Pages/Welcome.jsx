@@ -279,51 +279,39 @@ export default function Welcome({ auth, posts,
             <span className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 text-primary rounded-full mr-3">
               <i className="bi bi-sliders text-xl"></i>
             </span>
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <span className="">
               Nos Thématiques
             </span>
           </h2>
           <p className="text-lg text-gray-500 dark:text-gray-300 max-w-2xl mx-auto">
             Explorez nos contenus par centres d'intérêt
           </p>
-        </div>
+          </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-10">
-          {categories.map((category) => (
-            <Link
-              to={`/search?category_id=${category.id}`}
-            href={route("astuces.index",{"categorie_id": category.id,'lorem': category.titre})} 
-
-              key={category.id}
-              className="group relative overflow-hidden rounded-box p-4 transition-all duration-300 hover:transform hover:-translate-y-1 shadow-sm hover:shadow-md"
-              style={{ 
-                backgroundColor: `${category.couleur}10`,
-                border: `1px solid ${category.couleur}20`
-              }}
-            >
-              <div className="flex flex-col items-center text-center">
-                {category.image ? (
-                  <div className="w-12 h-12 mb-3 p-2 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-inner">
-                    <img 
-                      src={category.imageUrlcat} 
-                      alt={category.titre} 
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                ) : (
-                  <div 
-                    className="w-12 h-12 mb-3 p-2 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-inner"
-                    dangerouslySetInnerHTML={{ __html: category.svg }}
-                  />
-                )}
-                <span className="font-medium text-gray-700 dark:text-gray-200 group-hover:text-primary transition-colors">
-                  {category.titre}
-                </span>
-                <span className="absolute bottom-0 left-0 right-0 h-1 bg-current opacity-0 group-hover:opacity-100 transition-opacity"></span>
-              </div>
-            </Link>
-          ))}
+          <div className="flex flex-wrap gap-2 mb-4">
+  {categories.map(({id, titre, description, image, imageUrlcat, svg}) => (
+    <Link
+    href={route("astuces.index",{"categorie_id": id,'lorem': titre})} 
+    key={id}
+      title={titre}
+      data-tip={description}
+      className="btn btn-sm btn-ghost normal-case 
+                 bg-base-100 hover:bg-base-200 border border-base-300 
+                 dark:bg-base-100-dark dark:hover:bg-base-200-dark dark:border-base-300-dark
+                 flex items-center gap-2 px-4 py-2 rounded-btn
+                 ml-3 mr-2 mb-2"
+    >
+      {image ? (
+        <div className="w-5 h-5">
+          <img src={imageUrlcat} alt={titre} className="w-full h-full object-contain" />
         </div>
+      ) : (
+        <div className="w-5 h-5" dangerouslySetInnerHTML={{ __html: svg }} />
+      )}
+      <span>{titre}</span>
+    </Link>
+  ))}
+</div>
 
         <div className="text-center">
           <Link 

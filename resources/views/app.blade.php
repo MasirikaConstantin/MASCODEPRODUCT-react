@@ -48,7 +48,7 @@
             );
         </script>
     </head>
-    <body class="min-h-screen">
+    <body class="min-h-screen bg-base-100">
         @inertia
     </body>
 </html>

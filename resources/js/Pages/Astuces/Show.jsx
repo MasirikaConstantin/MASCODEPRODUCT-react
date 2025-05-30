@@ -6,6 +6,7 @@ import CommentFormAstuces from '@/Components/CommentFormAstuces';
 import CommentAstuces from '@/Components/CommentAstuce';
 import LikeButton from '@/Components/LikeButton';
 import BookmarkButton from '@/Components/BookmarkButton';
+import QuillContentViewer from '@/Components/QuillContentViewer';
 
 export default function Show({ astuce }) {
     const [showAllComments, setShowAllComments] = useState(false);
@@ -130,8 +131,10 @@ export default function Show({ astuce }) {
 
                                 <div 
                                     className="prose max-w-none mb-8"
-                                    dangerouslySetInnerHTML={{ __html: astuce.contenus }}
-                                />
+                                >
+<QuillContentViewer content={astuce.contenus} />
+                                </div>
+
 
                                 {astuce.codesource && (
                                     <PrismCode code={astuce.codesource} language={codeClass} />

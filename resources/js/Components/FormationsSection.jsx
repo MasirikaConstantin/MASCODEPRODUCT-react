@@ -710,10 +710,10 @@ const formations = [
     <section className="py-20 bg-base-200">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-primary mb-4">
+          <h2 className="text-2xl font-bold  mb-4">
             Formez-vous aux Technologies de Demain
           </h2>
-          <p className="text-base-content opacity-70 text-lg max-w-2xl mx-auto">
+          <p className="text-base-content opacity-70 text-md max-w-2xl mx-auto">
             Développez vos compétences avec nos formations en ligne certifiantes. 
             Explorez des domaines innovants et restez à la pointe de la technologie.
           </p>
