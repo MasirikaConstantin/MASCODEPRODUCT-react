@@ -1,0 +1,1 @@
+import{j as s,$ as o}from"./app-BwmMsR3-.js";import{O as r,F as e}from"./Footer-BpZ9e4JE.js";import{H as a}from"./Header-B6qQlfqo.js";function j({children:t}){return s.jsxs(s.Fragment,{children:[s.jsx(o,{title:"Accueil"}),s.jsx(a,{}),s.jsx(r,{position:"top-right"}),s.jsx("main",{className:"p-6",children:t}),s.jsx(e,{})]})}export{j as B};

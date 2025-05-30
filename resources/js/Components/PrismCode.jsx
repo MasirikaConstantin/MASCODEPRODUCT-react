@@ -15,7 +15,7 @@ const PrismCode = ({ code, language }) => {
   }, [code, language]);
 
   return (
-    <pre>
+    <pre className={`${language}`}>
       <code className={`${language}`}>
         {code}
       </code>

@@ -3,6 +3,7 @@ import Comment from '@/Components/Comment';
 import CommentForm from '@/Components/CommentForm';
 import LikeButton from '@/Components/LikeButton';
 import PrismCode from '@/Components/PrismCode';
+import QuillContentViewer from '@/Components/QuillContentViewer';
 import Layout from '@/Layouts/Base';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
@@ -106,11 +107,16 @@ const codeClass = getCodeClass({ id: post.categorie.id, titre: post.categorie.ti
                                     />
                                 </div>
                             )}
-
+{/*
                             <div 
                                 className="prose max-w-none mb-8  shadow-lg shadow-base-100 px-4 py-4"
                                 dangerouslySetInnerHTML={{ __html: post.contenus }}
-                            />
+                            />*/}
+                             <div 
+                                    className="prose max-w-none mb-8  shadow-lg shadow-base-100 px-4 py-4"
+                                >
+<QuillContentViewer content={post.contenus} />
+                                </div>
                             {post.codesource && (
                                 
                                       <PrismCode code={post.codesource} language={codeClass} />
