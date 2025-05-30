@@ -23,10 +23,14 @@ use App\Models\Post;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Spatie\Sitemap\SitemapGenerator;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-
+Route::get('/generate-sitemap', function () {
+    SitemapGenerator::create('https://mascodeproduct.com')->writeToFile(public_path('sitemap.xml'));
+    return 'Sitemap généré avec succès !';
+});
 Route::get('/auth/{provider}', [\App\Http\Controllers\Auth\OAuthController::class, 'redirectToProvider'])
     ->where('provider', 'google|github')
     ->name('oauth.login');
