@@ -1,1 +1,0 @@
-import{j as s,$ as o}from"./app-BE9Df22n.js";import{O as r,F as e}from"./Footer-xwZOFn1A.js";import{H as a}from"./Header-DHyJzNYu.js";function j({children:t}){return s.jsxs(s.Fragment,{children:[s.jsx(o,{title:"Accueil"}),s.jsx(a,{}),s.jsx(r,{position:"top-right"}),s.jsx("main",{className:"p-6",children:t}),s.jsx(e,{})]})}export{j as B};
