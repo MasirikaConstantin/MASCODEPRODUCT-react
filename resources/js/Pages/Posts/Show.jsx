@@ -109,6 +109,7 @@ const codeClass = getCodeClass({ id: post.categorie.id, titre: post.categorie.ti
                             )}
 {/*
                             <div 
+                            
                                 className="prose max-w-none mb-8  shadow-lg shadow-base-100 px-4 py-4"
                                 dangerouslySetInnerHTML={{ __html: post.contenus }}
                             />*/}

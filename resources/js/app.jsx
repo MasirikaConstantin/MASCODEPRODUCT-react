@@ -14,6 +14,8 @@ import {
 import { faClock as farClock, faCommentAlt as farCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import 'react-quill/dist/quill.snow.css'
+import 'prismjs/themes/prism-okaidia.css'
 
 // Initialisation optionnelle (peut aussi se faire au niveau des composants)
 Fancybox.bind("[data-fancybox]", {

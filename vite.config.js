@@ -10,5 +10,8 @@ export default defineConfig({
         }),
         react(),
     ],
+    optimizeDeps: {
+        include: ['prismjs', 'react-quill'] // Force l'inclusion
+      }
     
 });

@@ -8,6 +8,8 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.jsx',
+         './node_modules/react-quill/**/*.js',
+    './node_modules/prismjs/**/*.js'
     ],
           
     theme: {
