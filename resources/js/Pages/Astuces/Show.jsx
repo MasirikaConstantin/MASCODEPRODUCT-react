@@ -60,10 +60,20 @@ export default function Show({ astuce }) {
                                         >
                                             <div className="avatar">
                                                 <div className="w-12 rounded-full">
-                                                    <img 
-                                                        src={astuce.author.image || `https://ui-avatars.com/api/?name=${astuce.author.name}`} 
+              {astuce.author.image ? (
+                <img
+                className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+                src={`${window.location.origin}/storage/${astuce.author.image}`}
+
+                alt={astuce.titre}
+              />
+              ):(
+                    <img src={`https://ui-avatars.com/api/?name=${astuce.author.name}`} 
                                                         alt={astuce.author.name}
                                                     />
+              )}
+
+                                                    
                                                 </div>
                                             </div>
                                             <div>
@@ -224,9 +234,11 @@ export default function Show({ astuce }) {
                                                             <div className="w-20 h-20 flex-shrink-0 rounded overflow-hidden">
                                                                 <img 
                                                                     src={astuceLiee.image} 
+
                                                                     alt={astuceLiee.title}
                                                                     className="w-full h-full object-cover"
                                                                 />
+
                                                             </div>
                                                         ):(
                                                             <div className="avatar avatar-placeholder">
@@ -268,10 +280,18 @@ export default function Show({ astuce }) {
                                 <div className="flex items-center gap-4 mb-4">
                                     <div className="avatar">
                                         <div className="w-16 rounded-full">
-                                            <img 
-                                                src={astuce.author.image || `https://ui-avatars.com/api/?name=${astuce.author.name}`} 
-                                                alt={astuce.author.name}
-                                            />
+                                        {astuce.author.image ? (
+                                        <img
+                                        className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+                                        src={`${window.location.origin}/storage/${astuce.author.image}`}
+
+                                        alt={astuce.titre}
+                                    />
+                                    ):(
+                                            <img src={`https://ui-avatars.com/api/?name=${astuce.author.name}`} 
+                                                                                alt={astuce.author.name}
+                                                                            />
+                                    )}
                                         </div>
                                     </div>
                                     <div>

@@ -88,6 +88,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Astuce::class);
     }
+    public function imageUrl(){
+        return $this->image ? asset('storage/' . $this->image) : null;
+        //return Storage::disk('public')->url($this->image); 
+    }
 
     public function astuce()
     {

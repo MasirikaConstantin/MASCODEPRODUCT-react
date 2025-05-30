@@ -83,7 +83,6 @@ export default function ModalLogin({ status, canResetPassword }) {
     modal.addEventListener('close', resetForms);
     return () => modal.removeEventListener('close', resetForms);
   }, []);
-
   return (
     <>
       {/* Bouton conditionnel amélioré */}
@@ -91,9 +90,9 @@ export default function ModalLogin({ status, canResetPassword }) {
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar group relative">
             <div className="absolute inset-0 bg-primary/10 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300"></div>
-            {auth.user?.image ? (
+            {auth.user?.avatar ? (
               <img 
-                src={`${window.location.origin}/storage/${auth.user.image}`}
+                src={auth.user.avatar}
 
                 alt="Profile" 
                 className="w-10 rounded-full transition-all duration-300 hover:ring-2 hover:ring-primary" 

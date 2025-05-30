@@ -37,7 +37,7 @@ export default function ForumIndex({ posts, recents }) {
                             
                             <div className="flex-1">
                                 <Link 
-                        href={route('posts.show', { nom: recent.slug })}
+                        href={route('posts.show',  recent.slug )}
 
                                  className="hover:text-primary transition">
                                     <h3 className="font-semibold text-base-content">{recent.user.name}</h3>
@@ -134,7 +134,7 @@ export default function ForumIndex({ posts, recents }) {
                                     <span>Publié le : {new Date(post.created_at).toLocaleDateString()}</span>
                                 </div>
                                 <Link 
-                                    href={route('user.show', { nom: post.slug })}
+                                    href={route('posts.show', post.slug )}
                                     className="text-primary hover:text-primary-focus font-medium"
                                 >
                                     Lire la suite →

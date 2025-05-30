@@ -27,9 +27,13 @@ class UserController extends Controller
                     'title' => $post->titre,
                     'slug' => $post->slug,
                     "excerpt"=>Str::limit(strip_tags($post->contenus), 200),
-                    'image'=> $post->imageUrl(),
-                    'avatar'=> $post->imageUrl(),
-                    'author' => $post->user ? $post->user : 'Utilisateur inconnu', // Gestion du cas null
+                    'image'=> $post->imageUrl() ?:null,
+                    'avatar'=> $post->imageUrl() ?:null,
+                    'author' =>  [
+                        'id' => $post->user->id,
+                        'name' => $post->user->name,
+                        'avatar' => $post->user->imageUrl() ?:null,
+                    ], // Gestion du cas null
                     
                     'published_at' => $post->created_at->diffForHumans(),
                 ];
@@ -67,7 +71,7 @@ class UserController extends Controller
                     'user' => [
                         'id' => $comment->user->id,
                         'name' => $comment->user->name,
-                        'avatar' => $comment->user->image,
+                        'avatar' => $comment->user->imageUrl() ?:null,
                     ],
                     'replies' => $comment->replies->map(function ($reply) {
                         return [
@@ -77,7 +81,7 @@ class UserController extends Controller
                             'user' => [
                                 'id' => $reply->user->id,
                                 'name' => $reply->user->name,
-                                'avatar' => $reply->user->image,
+                                'avatar' => $reply->user->imageUrl() ?:null,
                             ],
                         ];
                     }),
@@ -92,10 +96,7 @@ class UserController extends Controller
                 'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
-                'avatar' => $user->image,
-                'bio' => $user->bio,
-                'website' => $user->website,
-                'birthdate' => $user->birthdate?->format('Y-m-d'),
+                'avatar' => $user->imageUrl() ?:null,
                 'created_at' => $user->created_at->diffForHumans(),
                 'deleted_at' => $user->deleted_at,
                 'comments_count' => $user->comments_count,
@@ -107,7 +108,7 @@ class UserController extends Controller
                 'user' => auth()->user() ? [
                     'id' => auth()->id(),
                     'name' => auth()->user()->name,
-                    'avatar' => auth()->user()->image,
+                    'avatar' => auth()->user()->imageUrl() ?:null,
                 ] : null
                 ],
                 'posts' => $posts,

@@ -187,9 +187,7 @@ class PostController extends Controller
                 'author' => [
                     'id' => $post->user->id,
                     'name' => $post->user->name,
-                    'username' => $post->user->username,
-                    'image' => $post->user->image,
-                    'bio' => $post->user->bio,
+                    'image' => $post->user->imageUrl() ?:null,
                 ],
                 'tags' => $post->tags->map(fn ($tag) => [
                     'id' => $tag->id,
@@ -239,8 +237,7 @@ private function formatComments($comments)
             'user' => [
                 'id' => $comment->user->id,
                 'name' => $comment->user->name,
-                'image' => $comment->user->image,
-                'username' => $comment->user->username,
+                'image' => $comment->user->imageUrl() ?:null,
             ],
             'stats' => [
                     'comments_count' => $comment->comments_count,

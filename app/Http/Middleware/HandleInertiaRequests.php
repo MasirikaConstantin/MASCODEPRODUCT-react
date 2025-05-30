@@ -43,7 +43,17 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user(),
+                'user' =>  [
+                'id' => $request->user()->id,
+                'name' => $request->user()->name,
+                'email' => $request->user()->email,
+                'avatar' => $request->user()->imageUrl() ?:null,
+                'created_at' => $request->user()->created_at->diffForHumans(),
+                'deleted_at' => $request->user()->deleted_at,
+                'comments_count' => $request->user()->comments_count,
+                'likes_count' => $request->user()->likes_count,
+                'posts_count' => $request->user()->posts_count,
+            ],
             ],
             'flash' => [
                 'success' => $request->session()->get('success'),

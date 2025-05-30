@@ -42,9 +42,18 @@ export default function Comment({ comment, auth, postId }) {
                     <div className="avatar">
                         <div className="w-10 rounded-full">
                             <img 
-                                src={comment.user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(comment.user.name)}`} 
+                                src={comment.user.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(comment.user.name)}`} 
                                 alt={comment.user.name}
                             />
+                            {comment.user.image && (
+                                    <figure className="mb-6 rounded-lg overflow-hidden">
+                                        <img 
+                                            src={comment.user.image} 
+                                            alt={comment.title} 
+                                            className="w-full h-auto max-h-[32rem] object-cover"
+                                        />
+                                    </figure>
+                                )}
                         </div>
                     </div>
                 </Link>
