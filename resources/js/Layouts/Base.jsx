@@ -12,7 +12,7 @@ export default function BaseLayout({ children }) {
         
         <Toaster position="top-right" />
   
-        <main className="p-6">{children}</main>
+        <main className="p-2">{children}</main>
   
         <Footer/>
       </>

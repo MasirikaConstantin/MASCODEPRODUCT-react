@@ -32,7 +32,7 @@ export default function Comment({ comment, auth, postId }) {
     };
 
     return (
-        <div className="pb-4 last:pb-0">
+        <div className="pb-4 last:pb-0 mt-4">
             <div className="flex gap-3">
                 <Link 
                     href={route('users.show', {user: `${comment.user.name.toLowerCase().replace(/\s+/g, '-')}-${comment.user.id}`})}

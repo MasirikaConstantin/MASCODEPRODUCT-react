@@ -6,7 +6,7 @@ const QuillContentViewer = ({ content }) => {
   return (
     <div className="ql-snow">
       <div 
-        className="ql-editor prose max-w-none"
+        className="ql-editor  max-w-none"
         dangerouslySetInnerHTML={{ __html: content }}
       />
     </div>

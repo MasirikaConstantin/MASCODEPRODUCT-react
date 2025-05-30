@@ -60,7 +60,7 @@ export default function Show({ astuce }) {
                     {/* Contenu principal */}
                     <div className="lg:w-2/3">
                         <article className="card bg-base-200 shadow-lg sm:shadow-xl">
-                            <div className="card-body p-4 sm:p-6">
+                            <div className="card-body p-1 sm:p-6">
                                 <header className="mb-4 sm:mb-6">
                                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3 sm:mb-4">
                                         <Link 
