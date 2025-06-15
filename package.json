@@ -37,6 +37,7 @@
         "prismjs": "^1.30.0",
         "react-hot-toast": "^2.5.2",
         "react-icons": "^5.5.0",
+        "react-markdown": "^10.1.0",
         "react-quill": "^2.0.0",
         "url-browserify": "^2.0.0",
         "util": "^0.12.5"

@@ -3,6 +3,7 @@ import { Link } from '@inertiajs/react';
 import ModalLogin from "@/Components/ModalLogin";
 import SearchModal from '@/Components/SearchModal';
 import NewsletterSubscription from '../NewsletterSubscription';
+import { FaRobot } from 'react-icons/fa';
 
 const Header = () => {
   const [searchModalOpen, setSearchModalOpen] = useState(false);
@@ -126,7 +127,9 @@ const Header = () => {
               <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                 <li><Link href={route('home')} className="active:bg-primary/20">Accueil</Link></li>
                 <li><Link href={route('astuces.index')} className="active:bg-primary/20">Astuces</Link></li>
-                <li><Link href={route('posts.index')} className="active:bg-primary/20">Tous les Posts</Link></li>
+                  
+                  <li><Link href={route('posts.index')} className="active:bg-primary/20">Tous les Posts</Link></li>
+                  <li><Link href={route('chat.show')} className="active:bg-primary/20">Chat</Link></li>
               </ul>
             </div>
 
@@ -190,6 +193,16 @@ const Header = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                   Tous les Posts
+                </Link>
+              </li>
+
+              <li>
+                <Link 
+                  href={route('chat.show')}
+                  className="hover:bg-primary/10 hover:text-primary rounded-btn transition-all duration-200 flex items-center gap-1"
+                >
+            <FaRobot className="w-5 h-5" />
+                  Chat
                 </Link>
               </li>
             </ul>

@@ -24,8 +24,16 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Spatie\Sitemap\SitemapGenerator;
+use App\Http\Controllers\ChatController;
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/chat', [ChatController::class, 'showChat']); 
+
+// Traite l'envoi de messages (POST)
+Route::get('/chat', [ChatController::class, 'showChat'])->name('chat.show');
+Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send');
 
 Route::get('/generate-sitemap', function () {
     SitemapGenerator::create('https://mascodeproduct.com')->writeToFile(public_path('sitemap.xml'));
